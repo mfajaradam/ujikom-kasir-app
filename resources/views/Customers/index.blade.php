@@ -38,17 +38,18 @@
                                 <td class="text-center">{{ $customer->address }}</td>
                                 <td class="text-center">{{ $customer->phone }}</td>
                                 <td class="text-center">
-                                    <form action="{{ route('customers.destroy', $customer->id) }}" method="POST">
-                                        {{-- Button Edit Member --}}
-                                        <button type="button" class="btn btn-primary btnedit"
-                                            value="{{ $customer->id }}">
-                                            Edit Data
-                                        </button>
-                                        {{-- Button Hapus Member --}}
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-flat show_confirm"
-                                            data-toggle="tooltip" title='Delete'>Delete Data</button>
+                                    @if (Auth::user()->role == 'Admin')
+                                        <form action="{{ route('customers.destroy', $customer->id) }}" method="POST">
+                                            {{-- Button Edit Member --}}
+                                            {{-- Button Hapus Member --}}
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-flat show_confirm"
+                                                data-toggle="tooltip" title='Delete'>Delete Data</button>
+                                    @endif
+                                    <button type="button" class="btn btn-primary btnedit" value="{{ $customer->id }}">
+                                        Edit Data
+                                    </button>
                                     </form>
                                 </td>
                             </tr>

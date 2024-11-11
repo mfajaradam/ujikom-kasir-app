@@ -20,16 +20,23 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </x-nav-link>
             </li>
+            {{-- @if (auth()->user()->role == 'Admin') --}}
             <li class="nav-item">
                 <x-nav-link href="/products" :active="request()->is('products')">
                     <span class="nav-link-text ms-1">Product</span>
                 </x-nav-link>
             </li>
+            {{-- @endif --}}
             <li class="nav-item">
                 <x-nav-link href="/customers" :active="request()->is('customers')">
                     <span class="nav-link-text ms-1">Customers</span>
                 </x-nav-link>
             </li>
+            {{-- <li class="nav-item">
+                <x-nav-link href="/user" :active="request()->is('users')">
+                    <span class="nav-link-text ms-1">User</span>
+                </x-nav-link>
+            </li> --}}
             <li class="nav-item">
                 <x-nav-link href="/posSystem" :active="request()->is('posSystem')">
                     <span class="nav-link-text ms-1">POS System</span>
@@ -48,8 +55,8 @@
         </ul>
         <div class="sidenav-footer position-absolute w-100 bottom-0 ">
             <div class="mx-3">
-              <a class="btn bg-gradient-danger w-100" href="{{ route('signOut') }}">Logout</a>
+                <a class="btn bg-gradient-danger w-100" href="{{ route('signOut') }}">Logout</a>
             </div>
-          </div>
+        </div>
     </div>
 </aside>

@@ -11,6 +11,8 @@ use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
+
 // use App\Http\Controllers\OrderProductController;
 
 // Customers
@@ -41,6 +43,8 @@ Route::group(['prefix' => 'account'], function () {
 Route::group(['middleware' => 'auth'], function () {
     // Dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Customer
     Route::prefix('customers')->group(function () {
         Route::get('/', [CustomersController::class, 'index'])->name('customers.index');
         Route::post('/store-customer', [CustomersController::class, 'store'])->name('customers.store');
@@ -74,5 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Logout
     Route::get('logout', [SignInController::class, 'logout'])->name('signOut');
 });
+
+
 
 Route::get('/orders', Order::class)->name('orders.index');

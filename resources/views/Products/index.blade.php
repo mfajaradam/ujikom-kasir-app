@@ -38,24 +38,28 @@
                                 <td class="text-center">{{ $i }}</td>
                                 <td class="text-center">{{ $product->ProductID }}</td>
                                 <td>
-                                    <img src="{{ asset('storage/images/' . $product->image) }}" class="mx-auto rounded-circle" alt="Image not found" width="50">
+                                    <img src="{{ asset('storage/images/' . $product->image) }}"
+                                        class="mx-auto rounded-circle" alt="Image not found" width="50">
                                 </td>
                                 <td class="text-center">{{ $product->name_product }}</td>
                                 <td class="text-center">{{ $product->category }}</td>
                                 <td class="text-center">{{ $product->price }}</td>
                                 <td class="text-center">{{ $product->stock }}</td>
                                 <td class="text-center">
-                                    <form action="{{ route('products.destroy', $product->id) }}" method="POST">
-                                        {{-- Button Edit Member --}}
-                                        <button type="button" class="btn btn-primary btnedit"
-                                            value="{{ $product->id }}">
-                                            Edit Data
-                                        </button>
-                                        {{-- Button Hapus Member --}}
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-flat show_confirm"
-                                            data-toggle="tooltip" title='Delete'>Delete Data</button>
+                                    @if (Auth::user()->role == 'Admin')
+                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+
+                                            {{-- Button Hapus Member --}}
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-flat show_confirm"
+                                                data-toggle="tooltip" title='Delete'>Delete Data</button>
+                                            {{-- Button Edit Member --}}
+                                            @endif
+                                            <button type="button" class="btn btn-primary btnedit"
+                                                value="{{ $product->id }}">
+                                                Edit Data
+                                            </button>
                                     </form>
                                 </td>
                             </tr>
@@ -97,7 +101,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="category" class="form-label">Category</label>
-                    <input type="text" class="form-control" id="category" name="category" placeholder="..." required>
+                    <input type="text" class="form-control" id="category" name="category" placeholder="..."
+                        required>
                     @error('category')
                         <div>{{ $message }}</div>
                     @enderror
@@ -146,14 +151,16 @@
                 </div>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="..." required>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="..."
+                        required>
                     @error('name')
                         <div>{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="category" class="form-label">Category</label>
-                    <input type="text" class="form-control" id="category" name="category" placeholder="..." required>
+                    <input type="text" class="form-control" id="category" name="category" placeholder="..."
+                        required>
                     @error('category')
                         <div>{{ $message }}</div>
                     @enderror

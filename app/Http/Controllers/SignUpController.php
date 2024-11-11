@@ -26,6 +26,7 @@ class SignUpController extends Controller
             'email' => 'required|email',
             'phone' => 'required|min:12',
             'password' => 'required|min:5',
+            'role' => 'required'
         ]);
 
         User::create([
@@ -34,6 +35,7 @@ class SignUpController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => $request->password,
+            'role' => $request->role,
             'created_at' => now(),
             'updated_at' => now()
         ]);

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Sale;
 
 class Customer extends Model
 {
@@ -11,10 +12,11 @@ class Customer extends Model
         'name_customer',
         'address',
         'phone',
+        'role'
     ];
 
     public function sales()
     {
-        return $this->hasMany(Sales::class, 'CustomerID');
+        return $this->hasMany(Sale::class, 'CustomerID');
     }
 }

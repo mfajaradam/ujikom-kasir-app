@@ -56,6 +56,17 @@
                                                 <div>{{ $message }}</div>
                                             @enderror
                                         </div>
+                                        <div class="input-group input-group-outline mb-3">
+                                            {{-- <label class="form-label">Role</label> --}}
+                                            <select class="form-control" name="role">
+                                                <option value="">Pilih Role</option>
+                                                <option value="Admin">Admin</option>
+                                                <option value="Petugas">Petugas</option>
+                                            </select>
+                                            @error('role')
+                                                <div>{{ $message }}</div>
+                                            @enderror
+                                        </div>
                                         <div class="text-center">
                                             <button type="submit"
                                                 class="btn btn-lg bg-gradient-dark btn-lg w-100 mt-4 mb-0">Sign
