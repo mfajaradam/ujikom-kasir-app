@@ -11,7 +11,6 @@
                 </p>
             </div>
 
-
             <div class="card p-4">
                 <div>
                     <!-- Button trigger modal -->
@@ -46,20 +45,19 @@
                                 <td class="text-center">{{ $product->price }}</td>
                                 <td class="text-center">{{ $product->stock }}</td>
                                 <td class="text-center">
-                                    @if (Auth::user()->role == 'Admin')
-                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST">
-
+                                    <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+                                        @if (Auth::user()->role == 'Admin')
                                             {{-- Button Hapus Member --}}
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-flat show_confirm"
                                                 data-toggle="tooltip" title='Delete'>Delete Data</button>
                                             {{-- Button Edit Member --}}
-                                            @endif
-                                            <button type="button" class="btn btn-primary btnedit"
-                                                value="{{ $product->id }}">
-                                                Edit Data
-                                            </button>
+                                        @endif
+                                        <button type="button" class="btn btn-primary btnedit"
+                                            value="{{ $product->id }}">
+                                            Edit Data
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
@@ -192,25 +190,29 @@
 
         $(document).ready(function() {
             $(document).on("click", ".btnedit", function() {
-                let customer_id = $(this).val();
-                // alert(customer_id);
+                let product_id = $(this).val();
                 $('#editModal').modal('show');
 
                 $.ajax({
                     type: "GET",
-                    url: 'products/edit-product/' + customer_id,
+                    url: 'products/edit-product/' + product_id,
                     success: function(response) {
-                        // console.log(response);
+                        // console.log(response); // Tambahkan ini untuk debugging
+
+                        // Set nilai setiap input field dengan data dari response
                         $('#ProductID').val(response.product.ProductID);
-                        $('#photo').val(response.product.image);
+                        $('#id').val(response.product.id);
+                        $('#photo').val(response.product.photo); // Kosongkan field foto karena hanya untuk upload file baru
                         $('#name').val(response.product.name_product);
                         $('#category').val(response.product.category);
                         $('#price').val(response.product.price);
                         $('#stock').val(response.product.stock);
-                        $('#id').val(response.product.id);
+                    },
+                    error: function(xhr) {
+                        console.error("Error fetching data:", xhr.responseText);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     </script>
 </x-layout>
